@@ -5,9 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - name: build
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: install buildozer
         run: |
-          pip install buildozer
-          pip install cython
-          buildozer android debug
+          pip install --upgrade pip
+          pip install buildozer cython
+          buildozer --version
+      - name: build apk
+        run: buildozer android debug
