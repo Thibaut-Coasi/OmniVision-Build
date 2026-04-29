@@ -1,12 +1,16 @@
-name: Build
+name: build
 on: push
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build with Buildozer
-        uses: Niklas-dev/buildozer-action@v1
+      - uses: actions/checkout@v3
+      - name: set up python
+        uses: actions/setup-python@v4
         with:
-          command: android debug
+          python-version: '3.9'
+      - name: build apk
+        run: |
+          pip install buildozer cython
+          buildozer android debug
 
