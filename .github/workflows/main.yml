@@ -4,13 +4,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: set up python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - name: build with buildozer
+        uses: ArtemSerebriakov/buildozer-action@v1
         with:
-          python-version: '3.9'
-      - name: build apk
-        run: |
-          pip install buildozer cython
-          buildozer android debug
-
+          command: android debug
