@@ -5,8 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build with Buildozer
-        uses: kivy/buildozer-action@master
+      - name: setup python
+        uses: actions/setup-python@v5
         with:
-          command: buildozer android debug
+          python-version: '3.10'
+      - name: install buildozer
+        run: |
+          pip install --user --upgrade buildozer cython
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: build apk
+        run: buildozer android debug
 
