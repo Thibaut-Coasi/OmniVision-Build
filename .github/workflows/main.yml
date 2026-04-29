@@ -5,6 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: safwan-abdu/buildozer-action@v1
-        with:
-          command: android debug
+      - uses: actions/setup-python@v2
+      - name: build
+        run: |
+          pip install buildozer
+          pip install cython
+          buildozer android debug
